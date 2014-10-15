@@ -794,6 +794,11 @@ vector<Vec2i> Device::mapDepthToColor( const vector<Vec2i>& v, const Channel16u&
 	return p;
 }
 
+KCBHANDLE Device::getDeviceHandle() const
+{
+    return mKinect;
+}
+
 void Device::start()
 {
 	long hr = S_OK;

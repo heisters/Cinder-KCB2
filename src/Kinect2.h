@@ -390,6 +390,8 @@ public:
 	ci::Vec2i													mapDepthToColor( const ci::Vec2i& v, const ci::Channel16u& depth ) const;
 	std::vector<ci::Vec2i>										mapDepthToColor( const std::vector<ci::Vec2i>& v, const ci::Channel16u& depth ) const;
 	std::vector<ci::Vec2i>										mapDepthToColor( const ci::Channel16u& depth ) const;
+
+    KCBHANDLE                                                   getDeviceHandle() const;
 protected:
 	enum : size_t
 	{
