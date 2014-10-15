@@ -256,8 +256,10 @@ public:
 	BodyFrame();
 
 	const std::vector<Body>&									getBodies() const;
+    ci::Vec4f                                                   getFloorClipPlane() const;
 protected:
 	std::vector<Body>											mBodies;
+    ci::Vec4f                                                   mFloorClipPlane;
 
 	friend class												Device;
 };

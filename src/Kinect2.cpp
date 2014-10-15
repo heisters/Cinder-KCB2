@@ -496,13 +496,18 @@ DepthFrame::DepthFrame()
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 BodyFrame::BodyFrame()
-: Frame()
+: Frame(), mFloorClipPlane( Vec4f::zero() )
 {
 }
 
 const vector<Body>& BodyFrame::getBodies() const
 {
 	return mBodies;
+}
+
+Vec4f BodyFrame::getFloorClipPlane() const
+{
+    return mFloorClipPlane;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -981,6 +986,21 @@ void Device::start()
 								}
 							}
 							frame.mTimeStamp	= static_cast<long long>( timeStamp );
+
+                            IBodyFrame *bodyFrame = nullptr;
+                            hr = KCBGetIBodyFrame( mKinect, &bodyFrame );
+                            if ( SUCCEEDED( hr ) && bodyFrame )
+                            {
+                                Vector4 fcp;
+                                hr = bodyFrame->get_FloorClipPlane( &fcp );
+                                if ( SUCCEEDED( hr ) )
+                                {
+                                    frame.mFloorClipPlane = toVec4f( fcp );
+                                }
+
+                                bodyFrame->Release();
+                                bodyFrame = nullptr;
+                            }
 						}
 						if ( frame.getTimeStamp() > mFrameBody.getTimeStamp() ) {
 							mFrameBody			= frame;
