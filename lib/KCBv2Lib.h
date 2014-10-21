@@ -24,10 +24,8 @@ See the Apache 2 License for the specific language governing permissions and lim
 #include <Kinect.h>                         // will need $(KINECTSDK20_DIR)inc; in the includes directory for project
 
 #ifdef WIN32
-    #ifdef KCBV2_EXPORTS
-        #define KINECT_CB __declspec(dllexport)
-    #else
-        #define KINECT_CB __declspec(dllimport)
+    #define KINECT_CB extern
+    #ifndef KCBV2_EXPORTS
         #pragma comment (lib, "KCBv2")      // add $(KINECTSDK20_DIR)lib\x64 or x86 to the library directory for project
     #endif // DLL_EXPORTS
 #endif //_WIN32
